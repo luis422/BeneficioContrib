@@ -1,0 +1,30 @@
+﻿@model MvBeneficio
+
+<div class="row">
+    <h4>@Html.DisplayNameForModel()</h4>
+    <hr />
+    <dl class="col-xs-6 offset-xs-3 col-md-8 offset-md-2 offset-0 col-12">
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="row text-start">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.PorcentagemDesconto)
+        </dt>
+        <dd class="row text-start">
+            @Html.DisplayFor(model => model.PorcentagemDesconto)
+        </dd>
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.QtdContribs)
+        </dt>
+        <dd class="row text-start">
+            @Html.DisplayFor(model => model.QtdContribs)
+        </dd>
+    </dl>
+</div>
+@* <div class="text-center">
+    @Html.ActionLink("Editar", "Salvar", new { id = Model.IdCodigo }, new { @class = "btn btn-primary" })
+    <a asp-action="Index" class="btn btn-warning">Voltar</a>
+</div> *@

@@ -1,0 +1,68 @@
+﻿@model MvContribuinte
+@{
+    var t = new MvBeneficio();
+}
+<table id="Beneficios@(Model.IdCodigo)" class="table table-bordered">
+    <thead>
+        <tr>
+            <th width="20px">
+                <input id="marcarTodosBeneficios@(Model.IdCodigo)" type="checkbox" class="form-check-input" onclick="AtualizarBeneficiosMarcados(@Model.IdCodigo, true)" />
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => t.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => t.PorcentagemDesconto)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Beneficios.Count; i++)
+        {
+            <tr>
+                <td>
+                    <div class="d-none">
+                        @Html.EditorFor(m => Model.Beneficios[i].Key)
+                    </div>
+                    <input type="checkbox" asp-for="@Model.Beneficios[i].Value" class="form-check-input" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Beneficios[i].Key.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Beneficios[i].Key.PorcentagemDesconto)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function(){
+        AtualizarMarcarTodos(@Model.IdCodigo);
+        $("#Beneficios" + @Model.IdCodigo + " tbody input[type=checkbox]").click(function(){
+            AtualizarMarcarTodos(@Model.IdCodigo);
+        })
+    });
+
+    function AtualizarBeneficiosMarcados(id) {
+        let ischecked = $("#marcarTodosBeneficios" + id).is(':checked');
+
+        $("#Beneficios" + id + " tbody input[type=checkbox]").each((e,i) => {
+            i.checked = ischecked;
+        });
+    }
+
+    function AtualizarMarcarTodos(id){
+        let qtdMarcados = $("#Beneficios" + id + " tbody input[type=checkbox]:checked").length;
+        let qtdTotal = $("#Beneficios" + id + " tbody input[type=checkbox]").length;
+
+        if (qtdTotal > 0 && qtdMarcados > 0 && qtdTotal != qtdMarcados) {
+            $("#marcarTodosBeneficios" + id)[0].indeterminate = true;
+        } else {
+            $("#marcarTodosBeneficios" + id)[0].indeterminate = false;
+        }
+
+        $("#marcarTodosBeneficios" + id)[0].checked = qtdTotal > 0 && qtdTotal == qtdMarcados;
+    }
+</script>

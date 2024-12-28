@@ -1,0 +1,58 @@
+﻿@model MvSimulacaoPagamento
+
+<h3>@Html.DisplayNameForModel()</h3>
+<hr />
+<div class="row">
+    <form asp-action="Calcular" method="post" class="form">
+        @Html.HiddenFor(m => m.IdContribuinte)
+        @Html.HiddenFor(m => m.IdBeneficio)
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <span class="nav-link disabled" aria-disabled="true">Contribuinte</span>
+                </li>
+                <li class="nav-item">
+                    <input type="button" class="nav-link" value="Benefício" onclick="Voltar(this.form)">
+                </li>
+                <li class="nav-item">
+                    <span aria-current="page" class="nav-link active">Cálculo</span>
+                </li>
+            </ul>
+        </div>
+        <br />
+
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" mask="@MascaraCampos.Get(MascaraCampos.Mascara.decimal2)" onchange="ChangeValor(this)" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <span class="form-control">@Model.Total.ToString("F2")</span>
+                <span asp-validation-for="Total" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 justify-content-evenly">
+                <input type="button" value="Voltar" class="btn btn-secondary" onclick="Voltar(this.form);" />
+                <input type="submit" value="Calcular" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function Voltar(elementoFormulario) {
+        elementoFormulario.action = elementoFormulario.action.replace('Calcular','SelecionarBeneficio');
+        elementoFormulario.submit();
+    }
+    function ChangeValor(element){
+        // console.log($(element).val());
+        // if ($(element).val().split(',')[0].trim() == ''){
+        //     $(element).val('0,00');
+        // }
+        element.form.submit();
+    }
+</script>

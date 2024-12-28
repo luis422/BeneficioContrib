@@ -1,0 +1,49 @@
+﻿@using BeneficioContrib.Cn.Contribuinte
+@model BeneficioContrib.Models.MvContribuinte
+
+<h3>@Html.DisplayNameForModel()</h3>
+<hr />
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-action="Salvar">
+            <input asp-for="IdCodigo" type="hidden" class="form-control" />
+            <div class="form-group">
+                <label asp-for="RazaoSocial" class="control-label"></label>
+                <input asp-for="RazaoSocial" class="form-control" />
+                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cnpj" class="control-label"></label>
+                <input asp-for="Cnpj" class="form-control" mask="@MascaraCampos.Get(MascaraCampos.Mascara.cnpj)" />
+                <span asp-validation-for="Cnpj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataAbertura" class="control-label"></label>
+                <input asp-for="DataAbertura" class="form-control" min="@(new DateTime(1753,1,1).ToString("s"))" max="@(DateTime.Today.AddDays(1).AddMinutes(-1).ToString("s"))" />
+                <span asp-validation-for="DataAbertura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegimeTributacao" class="control-label"></label>
+                @Html.DropDownListFor(model => model.RegimeTributacao, Html.GetEnumSelectList<EDdContribuinteRegimeTributacao>(), htmlAttributes: new { @class = "form-select" })
+                <span asp-validation-for="RegimeTributacao" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Beneficios" class="control-label"></label>
+                <partial name="_Beneficios" model="Model" />
+            </div>
+
+            <div class="form-group mt-3">
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

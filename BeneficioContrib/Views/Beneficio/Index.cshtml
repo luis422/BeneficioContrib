@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BeneficioContrib.Models.MvBeneficio>
+
+<h3>Benefícios</h3>
+<hr />
+
+<p>
+    <a asp-action="Salvar" class="btn btn-primary">Cadastrar</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th width="155px"></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PorcentagemDesconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdContribs)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is not null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("", "Salvar", new { id = item.IdCodigo }, new { @class = "btn text-warning bi bi-pencil" })
+                        <button class="btn text-success bi bi-plus" onclick="ExibirModal('@Url.Action("Detalhes", new { id = item.IdCodigo })')"></button>
+                        @Html.ActionLink("", "Excluir", new { id = item.IdCodigo }, new { @class = "btn text-danger bi bi-trash" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PorcentagemDesconto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QtdContribs)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-muted text-center" colspan="3"><span>Nenhum registro</span></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

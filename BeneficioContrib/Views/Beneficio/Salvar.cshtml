@@ -1,0 +1,33 @@
+﻿@model BeneficioContrib.Models.MvBeneficio
+
+<h3>@Html.DisplayNameForModel()</h3>
+<hr />
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <form asp-action="Salvar">
+            <input type="hidden" asp-for="IdCodigo" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PorcentagemDesconto" class="control-label"></label>
+                <input asp-for="PorcentagemDesconto" class="form-control" mask="@MascaraCampos.Get(MascaraCampos.Mascara.decimal2)" value="@Model.PorcentagemDesconto?.ToString("F2")" />
+                @* @Html.EditorFor(m => m.PorcentagemDesconto, new { htmlAttributes = new { @class = "form-control", mask = MascaraCampos.Get(MascaraCampos.Mascara.decimal2) } }) *@
+                <span asp-validation-for="PorcentagemDesconto" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

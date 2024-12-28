@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BeneficioContrib.Models.MvContribuinte>
+
+<h3>Contribuintes</h3>
+<hr />
+<p>
+    <a asp-action="Salvar" class="btn btn-primary">Cadastrar</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th width="155px"></th>
+            <th>
+                @Html.DisplayNameFor(model => model.RazaoSocial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                Possui Benefícios?
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegimeTributacao)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is not null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("", "Salvar", new { id = item.IdCodigo }, new { @class = "btn text-warning bi bi-pencil" })
+                        <button class="btn text-success bi bi-plus" onclick="ExibirModal('@Url.Action("Detalhes", new { id = item.IdCodigo })')"></button>
+                        @Html.ActionLink("", "Excluir", new { id = item.IdCodigo }, new { @class = "btn text-danger bi bi-trash" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RazaoSocial)
+                    </td>
+                    <td>
+                        @Formatacao.CpfCnpj(item.Cnpj)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Beneficios.Count > 0 ? "Sim, " + item.Beneficios.Count : "Não")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegimeTributacao)
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td class="text-muted text-center" colspan="5">Nenhum registro</td>
+            </tr>
+        }
+    </tbody>
+</table>

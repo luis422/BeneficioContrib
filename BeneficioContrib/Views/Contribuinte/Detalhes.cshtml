@@ -1,0 +1,69 @@
+﻿@model MvContribuinte
+
+<div class="row">
+    <h4>@Html.DisplayNameForModel()</h4>
+    <hr />
+    <dl class="col-xs-6 offset-xs-3 col-md-8 offset-md-2 offset-0 col-12">
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.RazaoSocial)
+        </dt>
+        <dd class="row text-start">
+            @Html.DisplayFor(model => model.RazaoSocial)
+        </dd>
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </dt>
+        <dd class="row text-start">
+            @Formatacao.CpfCnpj(Model.Cnpj)
+        </dd>
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.DataAbertura)
+        </dt>
+        <dd class="row text-start">
+            @Html.DisplayFor(model => model.DataAbertura)
+        </dd>
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.RegimeTributacao)
+        </dt>
+        <dd class="row text-start">
+            @Html.DisplayFor(model => model.RegimeTributacao)
+        </dd>
+
+        <dt class="row text-end">
+            @Html.DisplayNameFor(model => model.Beneficios)
+        </dt>
+        @if (Model.Beneficios is not null && Model.Beneficios.Count(b => b.Value) > 0)
+        {
+            <dd class="row text-start">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(m => Model.Beneficios.First().Key.Nome)</th>
+                            <th>@Html.DisplayNameFor(m => Model.Beneficios.First().Key.PorcentagemDesconto)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Beneficios.Where(b => b.Value))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Key.Nome)</td>
+                                <td>@Html.DisplayFor(m => item.Key.PorcentagemDesconto)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </dd>
+        }
+        else
+        {
+            <text>
+            <dd class="row text-start">Não possui</dd>
+            </text>
+        }
+
+
+    </dl>
+</div>
+@* <div> *@
+@*     @Html.ActionLink("Editar", "Salvar", new { id = Model.IdCodigo }, new { @class = "btn btn-secondary" }) *@
+@* </div> *@

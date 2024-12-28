@@ -1,0 +1,55 @@
+﻿@model MvSimulacaoPagamento
+
+<h3>@Html.DisplayNameForModel()</h3>
+<hr />
+<div class="row">
+    @if (Model.Contribuintes is not null && Model.Contribuintes.Any())
+    {
+        <form asp-action="SelecionarBeneficio" method="post" class="form">
+            @Html.HiddenFor(m => m.IdBeneficio)
+            @Html.HiddenFor(m => m.Valor)
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <span class="nav-link active" aria-current="page" href="#">Contribuinte</span>
+                    </li>
+                    <li class="nav-item">
+                        <input type="submit" value="Benefício" class="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link disabled" aria-disabled="true">Cálculo</span>
+                    </li>
+                </ul>
+            </div>
+            <br />
+
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
+                <div class="form-group">
+                    <label asp-for="IdContribuinte" class="control-label"></label>
+                    @Html.DropDownListFor(m => m.IdContribuinte, Model.SelectListItemFromContribuintes(), new { @class = "form-select" })
+                    <span asp-validation-for="IdContribuinte" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="col-6 justify-content-evenly">
+                        <input type="submit" value="Próximo" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div>
+            <div class="alert alert-warning">
+                <strong>
+                    <span class="bi-ban"></span> Antes de simular um pagamento é necessário cadastrar ao menos um contribuinte.
+                    Isso pode ser feito clicando no botão abaixo:
+                </strong>
+            </div>
+            <a asp-controller="Contribuinte" asp-action="Salvar" class="btn btn-primary">Cadastrar Contribuinte</a>
+        </div>
+    }
+</div>

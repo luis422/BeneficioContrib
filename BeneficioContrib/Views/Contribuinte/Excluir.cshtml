@@ -1,0 +1,23 @@
+﻿@model MvContribuinte
+
+<h3>
+    Realmente deseja excluir?
+</h3>
+@if (Model.Beneficios.Count > 0)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Esta ação irá excluir os vínculos de @Html.DisplayNameFor(m => m.Beneficios) com @Html.DisplayNameForModel()</strong>
+        @* <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> *@
+    </div>
+}
+<div class="d-block">
+
+    <partial name="Detalhes" model="Model" />
+
+    <form asp-action="Excluir" method="post" class="mt-3 text-center">
+        <div class="d-none">@Html.EditorForModel()</div>
+        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+        <input type="submit" value="Confirmar" class="btn btn-danger" />
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>
