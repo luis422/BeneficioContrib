@@ -50,7 +50,8 @@ namespace BeneficioContrib.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Total = CnBeneficio.SimularPagamento(model.IdBeneficio, model.Valor ?? 0);
+                model.Total = CnBeneficio.SimularPagamento(model.IdBeneficio, model.Valor ?? 0, out var beneficio);
+                model.PorcentagemDesconto = beneficio?.PorcentagemDesconto ?? 0;
             }
             else
             {

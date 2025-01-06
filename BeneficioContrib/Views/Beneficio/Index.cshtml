@@ -28,9 +28,9 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink("", "Salvar", new { id = item.IdCodigo }, new { @class = "btn text-warning bi bi-pencil" })
-                        <button class="btn text-success bi bi-plus" onclick="ExibirModal('@Url.Action("Detalhes", new { id = item.IdCodigo })')"></button>
-                        @Html.ActionLink("", "Excluir", new { id = item.IdCodigo }, new { @class = "btn text-danger bi bi-trash" })
+                        @Html.ActionLink("", "Salvar", new { id = item.IdCodigo }, new { @class = "btn m-1 btn-sm btn-outline-warning bi bi-pencil" })
+                        <button class="btn m-1 btn-sm btn-outline-success bi bi-plus" onclick="ExibirModal('@Url.Action("Detalhes", new { id = item.IdCodigo })')"></button>
+                        @Html.ActionLink("", "Excluir", new { id = item.IdCodigo }, new { @class = "btn m-1 btn-sm btn-outline-danger bi bi-trash" })
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)

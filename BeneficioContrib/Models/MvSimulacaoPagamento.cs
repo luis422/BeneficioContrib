@@ -21,6 +21,9 @@ namespace BeneficioContrib.Models
         [Display(Name = "Total a Pagar")]
         public decimal Total { get; set; }
 
+        [Display(Name = "Porcentagem Desconto")]
+        public decimal PorcentagemDesconto { get; set; }
+
         public List<MvContribuinte> Contribuintes;
         public List<MvBeneficio> Beneficios;
         public MvSimulacaoPagamento()

@@ -13,15 +13,15 @@ namespace BeneficioContrib.Cn.Beneficio
             Dao = new DaoBeneficio(contexto);
         }
 
-        public decimal SimularPagamento(int idBeneficio, decimal valor)
+        public decimal SimularPagamento(int idBeneficio, decimal valor, out DdBeneficio? beneficio)
         {
-            var b = ObterPorId(idBeneficio);
-            if (b is null)
+            beneficio = ObterPorId(idBeneficio);
+            if (beneficio is null)
             {
                 return valor;
             }
 
-            return valor - (valor * ((b.PorcentagemDesconto > 0 ? b.PorcentagemDesconto : 1) / 100));
+            return valor - (valor * ((beneficio.PorcentagemDesconto > 0 ? beneficio.PorcentagemDesconto : 1) / 100));
         }
 
 
