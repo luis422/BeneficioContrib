@@ -1,5 +1,8 @@
 ﻿namespace BeneficioContrib.Helpers
 {
+    /// <summary>
+    /// Padronização das mensagens de validação para DataAnnotations de validação nos models
+    /// </summary>
     public class MensagemValidacao
     {
         public const string Required = "{0} é um campo obrigatório";

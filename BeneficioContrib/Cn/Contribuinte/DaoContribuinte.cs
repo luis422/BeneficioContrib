@@ -77,10 +77,6 @@ namespace BeneficioContrib.Cn.Contribuinte
                     !contribuinte.Beneficios.Select(b => b.EsBeneficio).Contains(v.EsBeneficio))
                 .ToList();
 
-            //var atualizar = contribuinte.Beneficios
-            //    .Where(v => dbIdsBeneficios.Contains(v.EsBeneficio))
-            //    .ToList();
-
             var incluir = contribuinte.Beneficios
                 .Where(v => !dbIdsBeneficios.Contains(v.EsBeneficio))
                 .Select(v => new DdVinculoContribuinteBeneficio()
@@ -93,7 +89,6 @@ namespace BeneficioContrib.Cn.Contribuinte
 
             Db.VinculoContribuinteBeneficios.RemoveRange(excluir);
             Db.VinculoContribuinteBeneficios.AddRange(incluir);
-            //Db.VinculoContribuinteBeneficios.UpdateRange(atualizar);
             Db.SaveChanges();
         }
 
@@ -101,6 +96,13 @@ namespace BeneficioContrib.Cn.Contribuinte
         {
             Db.VinculoContribuinteBeneficios.RemoveRange(Db.VinculoContribuinteBeneficios.Where(v => v.EsContribuinte == idContribuinte));
             Db.SaveChanges();
+        }
+
+        internal DdContribuinte? ObterPorCnpj(string cnpj)
+        {
+            return Db.Contribuintes
+                .Include(nameof(DdContribuinte.Beneficios) + "." + nameof(DdVinculoContribuinteBeneficio.Beneficio))
+                .FirstOrDefault(c => c.Cnpj == cnpj);
         }
     }
 }

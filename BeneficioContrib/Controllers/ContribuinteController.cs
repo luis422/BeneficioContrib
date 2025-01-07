@@ -19,7 +19,7 @@ namespace BeneficioContrib.Controllers
 
         public IActionResult Index()
         {
-            return View(Cn.ListarTodos().Select(dd => new MvContribuinte(dd, [])));
+            return View(Cn.ListarTodos().Select(dd => new MvContribuinte(dd)));
         }
 
         public IActionResult Detalhes(int id)

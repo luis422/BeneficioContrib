@@ -1,6 +1,7 @@
 ﻿using BeneficioContrib.Cn.Beneficio;
 using BeneficioContrib.Cn.Contribuinte;
 using BeneficioContrib.Cn.Database;
+using BeneficioContrib.Helpers;
 using BeneficioContrib.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,25 +18,26 @@ namespace BeneficioContrib.Controllers
             CnBeneficio = new CnBeneficio(contexto);
         }
 
-        public IActionResult Index() => RedirectToAction(nameof(SelecionarContribuinte));
+        public IActionResult Index()
+        {
+            ModelState.Clear(); // Limpa o erro de validação de cnpj vazio
+            return View(nameof(SelecionarContribuinte), new MvSimulacaoPagamento());
+        }
 
+        [HttpPost]
         public IActionResult SelecionarContribuinte(MvSimulacaoPagamento model)
         {
-            model.Contribuintes = CnContribuinte.ListarTodos()
-                .Select(dd => new MvContribuinte(dd, []))
-                .ToList();
-
             return View(model);
         }
 
         [HttpPost]
         public IActionResult SelecionarBeneficio(MvSimulacaoPagamento model)
         {
-            var contribuinte = CnContribuinte.ObterPorId(model.IdContribuinte);
+            var contribuinte = CnContribuinte.ObterPorCnpj(Formatacao.RemoverMascara(model.CnpjContribuinte)!);
             if (contribuinte is null)
             {
-                ModelState.AddModelError("msg", "Contribuinte não encontrado");
-                return View(model);
+                ModelState.AddModelError(nameof(MvSimulacaoPagamento.CnpjContribuinte), "CNPJ não cadastrado!");
+                return View(nameof(SelecionarContribuinte), model);
             }
 
             model.Beneficios = contribuinte.Beneficios
@@ -56,6 +58,7 @@ namespace BeneficioContrib.Controllers
             else
             {
                 model.Valor = 0;
+                model.PorcentagemDesconto = 0;
             }
 
             return View(model);

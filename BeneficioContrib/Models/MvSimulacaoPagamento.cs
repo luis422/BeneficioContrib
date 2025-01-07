@@ -1,6 +1,5 @@
 ﻿using BeneficioContrib.Helpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.ComponentModel.DataAnnotations;
 
 namespace BeneficioContrib.Models
@@ -8,8 +7,11 @@ namespace BeneficioContrib.Models
     [Display(Name = "Simular Pagamento")]
     public class MvSimulacaoPagamento
     {
-        [Display(Name = "Selecione um Contribuinte")]
-        public int IdContribuinte { get; set; }
+        [Display(Name = "CNPJ")]
+        [Required(ErrorMessage = MensagemValidacao.Required)]
+        [MaxLength(14 + 4, ErrorMessage = MensagemValidacao.MaxLength)]
+        [MinLength(14 + 4, ErrorMessage = MensagemValidacao.MinLength)]
+        public string CnpjContribuinte { get; set; } = "";
 
         [Display(Name = "Selecione um Benefício")]
         public int IdBeneficio { get; set; }
@@ -24,30 +26,13 @@ namespace BeneficioContrib.Models
         [Display(Name = "Porcentagem Desconto")]
         public decimal PorcentagemDesconto { get; set; }
 
-        public List<MvContribuinte> Contribuintes;
+        public MvContribuinte Contribuinte;
         public List<MvBeneficio> Beneficios;
+
         public MvSimulacaoPagamento()
         {
-            Contribuintes = [];
             Beneficios = [];
-        }
-
-        public List<MvContribuinte> ListarTodosContribuintes() => Contribuintes;
-
-        public List<SelectListItem> SelectListItemFromContribuintes(bool addSelecione = false)
-        {
-            var listItem = Contribuintes.Select(c => new SelectListItem(
-                Formatacao.CpfCnpj(c.Cnpj) + " " + c.RazaoSocial,
-                c.IdCodigo.ToString(),
-                c.IdCodigo == IdContribuinte
-            )).ToList();
-
-            if (addSelecione)
-            {
-                listItem = listItem.Prepend(new SelectListItem("Nenhum Contribuinte", 0.ToString())).ToList();
-            }
-
-            return listItem;
+            Contribuinte = new MvContribuinte();
         }
 
         public List<SelectListItem> SelectListItemFromBeneficios(bool addSelecione = false)

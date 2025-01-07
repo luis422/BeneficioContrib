@@ -78,7 +78,7 @@ namespace BeneficioContrib.Cn.Contribuinte
                 Dao.ExcluirVinculoBeneficioPorIdContribuinte(contribuinte.IdCodigo);
 
                 var r = Dao.Excluir(contribuinte);
-                
+
                 if (r)
                     Db.Database.CommitTransaction();
                 else
@@ -91,6 +91,11 @@ namespace BeneficioContrib.Cn.Contribuinte
                 Db.Database.RollbackTransaction();
                 throw;
             }
+        }
+
+        public DdContribuinte? ObterPorCnpj(string cnpj)
+        {
+            return Dao.ObterPorCnpj(cnpj);
         }
     }
 }

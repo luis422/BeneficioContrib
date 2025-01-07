@@ -16,7 +16,6 @@ namespace BeneficioContrib.Models
         public string Nome { get; set; }
 
         [Display(Name = "Percentual de Desconto")]
-        //[DisplayFormat(DataFormatString = "{0:F2}%", ApplyFormatInEditMode = false)]
         [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = MensagemValidacao.Required)]
         [Range(0.01, 100, ErrorMessage = MensagemValidacao.Range)]

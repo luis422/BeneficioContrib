@@ -19,7 +19,7 @@ namespace BeneficioContrib
                 {
                     options.EnableDetailedErrors();
                     options.EnableSensitiveDataLogging();
-                    options.LogTo(Console.WriteLine);
+                    options.LogTo(Console.WriteLine); // Escreve os comandos SQL executados pelo O.R.M. na janela de "Saída" do Visual Studio
                 }
             });
 
@@ -34,11 +34,11 @@ namespace BeneficioContrib
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization(); // Não tem login
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Beneficio}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

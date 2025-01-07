@@ -10,7 +10,7 @@
     <thead>
         <tr>
             <th width="155px"></th>
-            <th>
+            <th class="text-truncate" style="max-width: 350px;">
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
@@ -32,7 +32,7 @@
                         <button class="btn m-1 btn-sm btn-outline-success bi bi-plus" onclick="ExibirModal('@Url.Action("Detalhes", new { id = item.IdCodigo })')"></button>
                         @Html.ActionLink("", "Excluir", new { id = item.IdCodigo }, new { @class = "btn m-1 btn-sm btn-outline-danger bi bi-trash" })
                     </td>
-                    <td>
+                    <td class="text-truncate" style="max-width: 350px;">
                         @Html.DisplayFor(modelItem => item.Nome)
                     </td>
                     <td>
@@ -47,7 +47,7 @@
         else
         {
             <tr>
-                <td class="text-muted text-center" colspan="3"><span>Nenhum registro</span></td>
+                <td class="text-muted text-center" colspan="4"><span>Nenhum registro</span></td>
             </tr>
         }
     </tbody>

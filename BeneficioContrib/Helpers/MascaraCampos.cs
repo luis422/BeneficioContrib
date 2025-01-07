@@ -1,20 +1,73 @@
 ﻿namespace BeneficioContrib.Helpers
 {
+    /// <summary>
+    /// Classe para ajudar a colocar máscara nos campos das views. Esta classe depende do bundle da biblioteca jquery-inputmask.
+    /// </summary>
     public class MascaraCampos
     {
+        /// <summary>
+        /// Tipos de máscaras disponíveis
+        /// </summary>
         public enum Mascara
         {
+            /// <summary>
+            /// 'mask':'99.999.999.9999-99'
+            /// </summary>
             cnpj,
+
+            /// <summary>
+            /// 'mask':'999.999.999-99'
+            /// </summary>
             cpf,
+
+            /// <summary>
+            /// 'mask':'99.999.999-*'
+            /// </summary>
             rg,
+
+            /// <summary>
+            /// 'mask':'999.99999.99.9'
+            /// </summary>
             pis_pasep,
+
+            /// <summary>
+            /// 'mask':'9999-9999'
+            /// </summary>
             telefone,
+
+            /// <summary>
+            /// 'mask':'99 9999-9999'
+            /// </summary>
             telefone_ddd,
+
+            /// <summary>
+            /// 'mask':'9 9999-9999'
+            /// </summary>
             celular,
+
+            /// <summary>
+            /// 'mask':'99 9 9999-9999'
+            /// </summary>
             celular_ddd,
+
+            /// <summary>
+            /// 'alias':'datetime','inputFormat':'dd/mm/yyyy'
+            /// </summary>
             data,
+
+            /// <summary>
+            /// 'alias':'datetime','inputFormat':'dd/mm/yyyy HH:MM'
+            /// </summary>
             data_hora,
+
+            /// <summary>
+            /// 'alias':'email'
+            /// </summary>
             email,
+
+            /// <summary>
+            /// 'mask':'9{1,11},99'
+            /// </summary>
             decimal2,
         }
 

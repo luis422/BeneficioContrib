@@ -30,7 +30,6 @@ function CustomizarValidacao() {
 
     // Número com ',' em vez de '.' na validação de intervalo
     $.validator.methods.range = function (value, element, param) {
-        console.log(globalizedValue);
         var globalizedValue = value.trimEnd(',').replace(",", ".");
         return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
     }

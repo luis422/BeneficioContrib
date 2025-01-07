@@ -1,0 +1,16 @@
+﻿<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">Simulação de Pagamentos!</h1>
+        <hr />
+        <h2 class="m-3">
+            @if (true.Equals(ViewData["banco"]))
+            {
+                <span class="text-success bi bi-database-fill-check"> Banco de dados conectado!</span>
+            }
+            else
+            {
+                <span class="text-danger bi bi-database-fill-x"> Não foi possível conectar com o banco de dados</span>
+            }
+        </h2>
+    </div>
+</div>

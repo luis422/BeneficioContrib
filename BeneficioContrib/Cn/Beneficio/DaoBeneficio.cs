@@ -26,15 +26,6 @@ namespace BeneficioContrib.Cn.Beneficio
                 result => result.beneficio,
                 result => result.count
             );
-
-            //return Db.Beneficios.Select(b => new
-            //{
-            //    beneficio = b,
-            //    count = Db.VinculoContribuinteBeneficios.Count(v => v.EsBeneficio == b.IdCodigo)
-            //}).ToDictionary(
-            //    result => result.beneficio,
-            //    result => result.count
-            //);
         }
 
         internal List<DdBeneficio> ListarTodosExcetoIds(List<int> idsNaoBuscar)

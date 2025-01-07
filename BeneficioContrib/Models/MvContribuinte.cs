@@ -1,9 +1,9 @@
-﻿using BeneficioContrib.Cn.Contribuinte.VinculoContribuinteBeneficio;
+﻿using BeneficioContrib.Cn.Beneficio;
 using BeneficioContrib.Cn.Contribuinte;
-using System.ComponentModel.DataAnnotations;
+using BeneficioContrib.Cn.Contribuinte.VinculoContribuinteBeneficio;
 using BeneficioContrib.Helpers;
 using System.ComponentModel;
-using BeneficioContrib.Cn.Beneficio;
+using System.ComponentModel.DataAnnotations;
 
 namespace BeneficioContrib.Models
 {
@@ -25,7 +25,7 @@ namespace BeneficioContrib.Models
         public string Cnpj { get; set; }
 
         [Display(Name = "Data de Abertura")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = MensagemValidacao.Required)]
         public DateTime DataAbertura { get; set; }
 
@@ -42,6 +42,10 @@ namespace BeneficioContrib.Models
             RazaoSocial = "";
             Beneficios = [];
             DataAbertura = DateTime.Now;
+        }
+
+        public MvContribuinte(DdContribuinte dd) : this(dd, [])
+        {
         }
 
         public MvContribuinte(DdContribuinte dd, List<DdBeneficio> beneficiosAdicionais)

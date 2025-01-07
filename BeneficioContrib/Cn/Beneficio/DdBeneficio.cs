@@ -1,7 +1,6 @@
 ﻿using BeneficioContrib.Helpers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 
 namespace BeneficioContrib.Cn.Beneficio
 {

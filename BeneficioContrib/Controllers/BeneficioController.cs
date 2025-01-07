@@ -1,7 +1,7 @@
-﻿using BeneficioContrib.Models;
-using Microsoft.AspNetCore.Mvc;
-using BeneficioContrib.Cn.Beneficio;
+﻿using BeneficioContrib.Cn.Beneficio;
 using BeneficioContrib.Cn.Database;
+using BeneficioContrib.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BeneficioContrib.Controllers
 {
@@ -42,8 +42,8 @@ namespace BeneficioContrib.Controllers
             {
                 return View(new MvBeneficio());
             }
-            
-            return View(new MvBeneficio(dd.Value.Beneficio,dd.Value.Count));
+
+            return View(new MvBeneficio(dd.Value.Beneficio, dd.Value.Count));
         }
 
         [HttpPost]
